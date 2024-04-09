@@ -1,5 +1,6 @@
 package com.example.net0backend.entity;
 
+import com.example.net0backend.entity.metadata.BaseTimeEntity;
 import com.example.net0backend.enums.UserType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "users")
-public class Users {
+public class Users extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "users_id")
