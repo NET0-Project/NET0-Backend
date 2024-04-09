@@ -1,5 +1,6 @@
 package com.example.net0backend.entity;
 
+import com.example.net0backend.entity.metadata.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "users_alert")
-public class UsersAlert {
+public class UsersAlert extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "users_alert_id")
