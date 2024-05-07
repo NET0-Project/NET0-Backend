@@ -23,5 +23,14 @@ public class Shop extends BaseTimeEntity {
 
     private String address;
 
+    private String call;
 
+    @Column(name = "shop_description")
+    private String description;
+
+    private double latitude; //위도
+
+    private double longitude; //경도
+
+    private String openingHour;
 }
