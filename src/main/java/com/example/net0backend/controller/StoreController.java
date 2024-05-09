@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("api/v1/store")
@@ -21,10 +23,10 @@ public class StoreController {
     private final StoreService storeService;
 
     @GetMapping("/list")
-    public ResponseEntity<NearStoreResponse> getNearStoreList(@RequestBody @Valid MyLocationRequest myLocationRequest) {
+    public ResponseEntity<List<NearStoreResponse>> getNearStoreList(@RequestBody @Valid MyLocationRequest myLocationRequest) {
         log.info("내 위치의 위도: {}, 경도: {}", myLocationRequest.getX(), myLocationRequest.getY());
-        storeService.getNearStoreList(myLocationRequest);
-        return ResponseEntity.ok().build();
+        List<NearStoreResponse> nearStoreList = storeService.getNearStoreList(myLocationRequest);
+        return ResponseEntity.ok(nearStoreList);
     }
 
 }
