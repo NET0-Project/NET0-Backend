@@ -1,6 +1,7 @@
 package com.example.net0backend.entity;
 
 import com.example.net0backend.entity.metadata.BaseTimeEntity;
+import com.example.net0backend.enums.StoreStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -28,9 +29,13 @@ public class Shop extends BaseTimeEntity {
     @Column(name = "shop_description")
     private String description;
 
-    private double latitude; //위도
+    private Double latitude; //위도
 
-    private double longitude; //경도
+    private Double longitude; //경도
 
     private String openingHour;
+
+    @Enumerated(EnumType.STRING)
+    private StoreStatus status;
+
 }
