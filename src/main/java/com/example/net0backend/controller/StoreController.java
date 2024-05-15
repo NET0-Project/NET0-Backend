@@ -23,7 +23,7 @@ public class StoreController {
     private final StoreService storeService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<NearStoreResponse>> getNearStoreList(@RequestBody @Valid MyLocationRequest myLocationRequest) {
+    public ResponseEntity<List<NearStoreResponse>> getNearStoreList(@Valid MyLocationRequest myLocationRequest) {
         log.info("내 위치의 위도: {}, 경도: {}", myLocationRequest.getX(), myLocationRequest.getY());
         List<NearStoreResponse> nearStoreList = storeService.getNearStoreList(myLocationRequest);
         return ResponseEntity.ok(nearStoreList);
