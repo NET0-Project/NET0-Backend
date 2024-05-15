@@ -16,10 +16,12 @@ import java.util.stream.Collectors;
 @Slf4j
 @Transactional
 public class ItemService {
+
     private final ItemRepository itemRepository;
 
     public List<ItemStoreResponse> getItemsByStore(Long storeId){
         List<Item> items = itemRepository.findItemByStore(storeId);
+        log.info(items.toString());
         return items.stream()
                 .map(item -> ItemStoreResponse.toDto(item))
                 .collect(Collectors.toList());

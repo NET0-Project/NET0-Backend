@@ -5,5 +5,5 @@ import com.example.net0backend.entity.Item;
 import java.util.List;
 
 public interface ItemRepositoryCustom {
-    List<Item> findItemByStore(Long storeID);
+    List<Item> findItemByStore(Long storeId);
 }

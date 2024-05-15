@@ -20,9 +20,10 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @GetMapping("/{shop_id}")
+    @GetMapping("/{storeId}")
     public List<ItemStoreResponse> showItemSearchByStore(@PathVariable Long storeId){
         //shopId에 대한 예외 처리 필요
+        log.info("storeId = "+storeId);
         return itemService.getItemsByStore(storeId);
     }
 }

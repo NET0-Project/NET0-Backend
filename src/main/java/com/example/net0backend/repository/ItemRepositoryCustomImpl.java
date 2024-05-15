@@ -7,9 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-//@Repository
-//@RequiredArgsConstructor
-//public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
-//    private final JpaQueryMethodFactory queryFactory;
-//
-//}
+@Repository
+@RequiredArgsConstructor
+public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
+
+}
