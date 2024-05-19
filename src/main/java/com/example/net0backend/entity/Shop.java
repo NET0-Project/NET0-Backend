@@ -11,8 +11,6 @@ import lombok.Setter;
 @Getter
 //@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "shop")
-@Setter
-@NoArgsConstructor
 public class Shop extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

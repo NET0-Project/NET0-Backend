@@ -11,10 +11,8 @@ import java.time.LocalDate;
 
 @Entity
 @Getter
-//@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "item")
-@Setter
-@NoArgsConstructor
 public class Item extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
