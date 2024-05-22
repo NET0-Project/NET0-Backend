@@ -22,6 +22,7 @@ public class ItemController {
 
     @GetMapping("/{storeId}")
     public List<ItemStoreResponse> showItemSearchByStore(@PathVariable Long storeId){
+        //findStoreById 개발 이후 throw StoreNotFoundException 추가하기
         log.info("storeId = "+storeId);
         return itemService.getItemsByStore(storeId);
     }
