@@ -3,6 +3,7 @@ package com.example.net0backend.auth;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ import java.util.Date;
 @Component
 public class JWTProvider {
 
-    @Value("${jwt.secret}")
+    @Value("${jwt.secret_key}")
     private String secretKey;
     private TokenStatus tokenStatus;
     private final long EXPIRED_TIME = 2; // 토큰 만료 시간 2H

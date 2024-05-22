@@ -7,6 +7,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -17,12 +20,23 @@ public class Users extends BaseTimeEntity {
     @Column(name = "users_id")
     private Long id;
 
+    private String name;
+
+    private String email;
+
+    private String password;
+
+    private LocalDateTime lastLoginAt;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shop_id")
     private Shop shop;
 
-    private String name;
-
     @Enumerated(EnumType.STRING)
     private UserType userType;
+
+    //== 비즈니스 로직 ==//
+    public void updateLastLogin() {
+        this.lastLoginAt = LocalDateTime.now();
+    }
 }
