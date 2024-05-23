@@ -26,6 +26,8 @@ public class Users extends BaseTimeEntity {
 
     private String password;
 
+    private String refreshToken;
+
     private LocalDateTime lastLoginAt;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -38,5 +40,8 @@ public class Users extends BaseTimeEntity {
     //== 비즈니스 로직 ==//
     public void updateLastLogin() {
         this.lastLoginAt = LocalDateTime.now();
+    }
+    public void updateRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

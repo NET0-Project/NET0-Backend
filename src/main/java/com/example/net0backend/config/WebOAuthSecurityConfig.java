@@ -64,6 +64,9 @@ public class WebOAuthSecurityConfig {
 
     private class FailedAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
+        /**
+         * 인증 실패시 응답을 처리 하는 메소드
+         */
         @Override
         public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
             response.setContentType("application/json");
