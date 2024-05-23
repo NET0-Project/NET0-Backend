@@ -19,15 +19,17 @@ public class JWTProvider {
 
     @Value("${jwt.secret_key}")
     private String secretKey;
-    private TokenStatus tokenStatus;
-    private final long EXPIRED_TIME = 2; // 토큰 만료 시간 2H
+    @Value("${jwt.access_token_validity_seconds}")
+    private long ACCESS_TOKEN_EXP;
+    @Value("${jwt.refresh_token_validity_seconds}")
+    private long REFRESH_TOKEN_EXP;
     public final String TOKEN_PRIFIX = "Bearer ";
 
     /**
      * JWT 토큰 생성
      */
-    public String createToken(JWTUserInfo userInfo) {
-        Date expiredDate = Date.from(Instant.now().plus(EXPIRED_TIME, ChronoUnit.HOURS));
+    private String createToken(JWTUserInfo userInfo, long expiredTime) {
+        Date expiredDate = Date.from(Instant.now().plus(expiredTime, ChronoUnit.HOURS));
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .setSubject(userInfo.getEmail()) // 사용자 식별자
@@ -38,8 +40,12 @@ public class JWTProvider {
                 .compact();
     }
 
-    public String getSubject(String token) {
-        return null;
+    public String createAccessToken(JWTUserInfo userInfo) {
+        return createToken(userInfo, ACCESS_TOKEN_EXP);
+    }
+
+    public String createRefreshToken(JWTUserInfo userInfo) {
+        return createToken(userInfo, REFRESH_TOKEN_EXP);
     }
 
     /**
