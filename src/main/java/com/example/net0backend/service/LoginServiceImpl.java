@@ -3,7 +3,9 @@ package com.example.net0backend.service;
 import com.example.net0backend.auth.JWTProvider;
 import com.example.net0backend.auth.JWTUserInfo;
 import com.example.net0backend.dto.request.SignInRequest;
+import com.example.net0backend.dto.request.TokenRefreshRequest;
 import com.example.net0backend.dto.response.SignInResponse;
+import com.example.net0backend.dto.response.TokenRefreshResponse;
 import com.example.net0backend.entity.Users;
 import com.example.net0backend.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +26,7 @@ public class LoginServiceImpl implements LoginService{
 
     @Override
     @Transactional
-    public ResponseEntity<? super SignInResponse> signIn(SignInRequest signInRequest) {
+    public ResponseEntity<SignInResponse> signIn(SignInRequest signInRequest) {
         Users user = usersRepository.findByEmail(signInRequest.getKakaoAccount())
                 .orElseThrow(() -> new RuntimeException("존재 하지 않는 유저입니다."));
         String accessToken = jwtProvider.createAccessToken(JWTUserInfo.from(user));
@@ -32,5 +34,15 @@ public class LoginServiceImpl implements LoginService{
         user.updateRefreshToken(refreshToken);
         user.updateLastLogin();
         return SignInResponse.success(accessToken, refreshToken);
+    }
+
+    @Override
+    public ResponseEntity<TokenRefreshResponse> validRefreshToken(TokenRefreshRequest tokenRefreshRequest) {
+        Users user = usersRepository.findByEmail(tokenRefreshRequest.getKakaoAccount())
+                .orElseThrow(() -> new RuntimeException("존재 하지 않는 유저입니다."));
+        if (!user.getRefreshToken().equals(tokenRefreshRequest.getRefreshToken())) {
+            throw new RuntimeException("유효하지 않은 리프레시 토큰입니다.");
+        }
+        return ResponseEntity.ok(TokenRefreshResponse.of(jwtProvider.createAccessToken(JWTUserInfo.from(user))));
     }
 }
