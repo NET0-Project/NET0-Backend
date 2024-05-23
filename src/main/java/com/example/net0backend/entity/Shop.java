@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Entity
 @Getter
-//@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "shop")
 public class Shop extends BaseTimeEntity {
     @Id
