@@ -1,9 +1,7 @@
 package com.example.net0backend.auth;
 
-import com.example.net0backend.entity.Users;
-import com.example.net0backend.repository.UsersRepository;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
+import com.example.net0backend.entity.User;
+import com.example.net0backend.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,14 +27,14 @@ import java.util.List;
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
     private final JWTProvider jwtProvider;
-    private final UsersRepository usersRepository;
+    private final UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorizationHeader = request.getHeader("Authorization");
         try {
             String userEmail = jwtProvider.validateTokenReturnEmail(authorizationHeader);
-            Users user = usersRepository.findByEmail(userEmail)
+            User user = userRepository.findByKakaoEmail(userEmail)
                     .orElseThrow(() -> new RuntimeException("유저를 찾을 수 없습니다."));
 
             List<GrantedAuthority> authorities = new ArrayList<>();

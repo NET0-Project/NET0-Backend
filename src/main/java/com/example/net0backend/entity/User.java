@@ -1,20 +1,21 @@
 package com.example.net0backend.entity;
 
+import com.example.net0backend.dto.request.SignInRequest;
 import com.example.net0backend.entity.metadata.BaseTimeEntity;
 import com.example.net0backend.enums.UserType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "users")
-public class Users extends BaseTimeEntity {
+public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "users_id")
@@ -22,7 +23,11 @@ public class Users extends BaseTimeEntity {
 
     private String name;
 
-    private String email;
+    private String kakaoEmail;
+
+    private Long kakaoPK;
+
+    private String kakaoProfile;
 
     private String password;
 
@@ -37,6 +42,18 @@ public class Users extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
+    @Builder
+    public User(String name, String kakaoEmail, Long kakaoPK, String kakaoProfile, String password, String refreshToken, Shop shop, UserType userType) {
+        this.name = name;
+        this.kakaoEmail = kakaoEmail;
+        this.kakaoPK = kakaoPK;
+        this.kakaoProfile = kakaoProfile;
+        this.password = password;
+        this.refreshToken = refreshToken;
+        this.shop = shop;
+        this.userType = userType;
+    }
+
     //== 비즈니스 로직 ==//
     public void updateLastLogin() {
         this.lastLoginAt = LocalDateTime.now();
@@ -44,4 +61,15 @@ public class Users extends BaseTimeEntity {
     public void updateRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
+
+    public static User signupUser(SignInRequest signInRequest) {
+        return User.builder()
+                .kakaoEmail(signInRequest.getKakaoAccount())
+                .kakaoPK(signInRequest.getKakaoPK())
+                .kakaoProfile(signInRequest.getProfile())
+                .userType(UserType.ROLE_USER)
+                .build();
+    }
+
+
 }
