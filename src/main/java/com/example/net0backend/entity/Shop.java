@@ -18,7 +18,7 @@ public class Shop extends BaseTimeEntity {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    private Users users;
+    private User user;
 
     private String name;
 

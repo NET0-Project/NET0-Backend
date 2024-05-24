@@ -21,11 +21,11 @@ public class Orders extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
-    private Users customer;
+    private User customer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id")
-    private Users seller;
+    private User seller;
 
     private LocalDateTime orderDate;
 
