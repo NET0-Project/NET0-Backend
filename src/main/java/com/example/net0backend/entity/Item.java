@@ -5,8 +5,9 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -25,6 +26,9 @@ public class Item extends BaseEntity {
     @Column(name = "item_name")
     private String name;
 
+    @Column(name = "item_origin_price")
+    private int originPrice;
+
     @Column(name = "item_price")
     private int price;
 
@@ -33,7 +37,7 @@ public class Item extends BaseEntity {
     private int stock;
 
     @Column(name = "exp_date")
-    private LocalDateTime exp; //유통기한
+    private LocalDate exp;
 
     @Column(name = "item_description")
     private String description;
