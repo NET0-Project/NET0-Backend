@@ -11,5 +11,4 @@ public interface ItemRepository extends JpaRepository<Item, Long>, ItemRepositor
 
     @Query("select i from Item i where i.shop.id =:storeId")
     List<Item> findItemByStore(@Param("storeId") Long storeId);
-
 }
