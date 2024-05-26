@@ -1,10 +1,12 @@
 package com.example.net0backend.entity;
 
 import com.example.net0backend.entity.metadata.BaseTimeEntity;
+import com.example.net0backend.enums.StoreStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -17,11 +19,24 @@ public class Shop extends BaseTimeEntity {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    private Users users;
+    private User user;
 
     private String name;
 
     private String address;
 
+    private String call;
+
+    @Column(name = "shop_description")
+    private String description;
+
+    private Double latitude; //위도
+
+    private Double longitude; //경도
+
+    private String openingHour;
+
+    @Enumerated(EnumType.STRING)
+    private StoreStatus status;
 
 }

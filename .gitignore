@@ -38,3 +38,6 @@ out/
 
 ### yml ###
 *.yml
+
+### h2 database ###
+h2.txt

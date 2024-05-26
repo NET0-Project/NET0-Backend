@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum UserType {
-    ROLE_ADMIN("admin"), ROLE_SELLER("seller"), ROLE_USER("user");
+public enum StoreStatus {
+    FOOD("남아요"), NOFOOD("없어요"), CLOSE("닫았어요");
 
-    private final String type;
+    private final String status;
 }
