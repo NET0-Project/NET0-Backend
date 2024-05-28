@@ -33,7 +33,7 @@ public class ItemController {
     @GetMapping("/{storeId}")
     public ResponseEntity<Map<String,Object>> showItemSearchByStore(@PathVariable Long storeId){
         Optional<Shop> store = storeService.getShopById(storeId);
-        if(store.isPresent()) throw new StoreNotFoundException(ErrorCode.STORE_NOT_FOUND);
+        if(!store.isPresent()) throw new StoreNotFoundException(ErrorCode.STORE_NOT_FOUND);
 
         Map<String, Object> result = new HashMap<>();
         result.put("storeId",storeId);
