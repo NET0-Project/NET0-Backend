@@ -1,7 +1,7 @@
 package com.example.net0backend.controller;
 
 
-import com.example.net0backend.dto.ItemStoreResponse;
+import com.example.net0backend.dto.ItemResponse;
 import com.example.net0backend.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ public class ItemController {
     private final ItemService itemService;
 
     @GetMapping("/{storeId}")
-    public List<ItemStoreResponse> showItemSearchByStore(@PathVariable Long storeId){
+    public List<ItemResponse> showItemSearchByStore(@PathVariable Long storeId){
         //findStoreById 개발 이후 throw StoreNotFoundException 추가하기
         log.info("storeId = "+storeId);
         return itemService.getItemsByStore(storeId);
