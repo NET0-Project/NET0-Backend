@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -27,5 +28,9 @@ public class StoreService {
             nearStoreResponseList.add(nearStoreResponse.from(shop));
         });
         return nearStoreResponseList;
+    }
+
+    public Optional<Shop> getShopById(Long storeId){
+        return shopRepository.findShopById(storeId);
     }
 }
