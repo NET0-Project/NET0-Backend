@@ -24,7 +24,7 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/item")
+@RequestMapping("/api/v1/item")
 public class ItemController {
 
     private final ItemService itemService;
