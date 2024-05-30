@@ -1,6 +1,6 @@
 package com.example.net0backend.service;
 
-import com.example.net0backend.dto.ItemStoreResponse;
+import com.example.net0backend.dto.ItemResponse;
 import com.example.net0backend.entity.Item;
 import com.example.net0backend.repository.ItemRepository;
 import jakarta.transaction.Transactional;
@@ -19,11 +19,11 @@ public class ItemService {
 
     private final ItemRepository itemRepository;
 
-    public List<ItemStoreResponse> getItemsByStore(Long storeId){
+    public List<ItemResponse> getItemsByStore(Long storeId){
         List<Item> items = itemRepository.findItemByStore(storeId);
         log.info(items.toString());
         return items.stream()
-                .map(item -> ItemStoreResponse.toDto(item))
+                .map(item -> ItemResponse.toDto(item))
                 .collect(Collectors.toList());
     }
 }

@@ -26,17 +26,14 @@ public class Item extends BaseEntity {
     @Column(name = "item_name")
     private String name;
 
-    @Column(name = "item_origin_price")
     private int originPrice;
 
-    @Column(name = "item_price")
     private int price;
 
     private double discountRate;
 
     private int stock;
 
-    @Column(name = "exp_date")
     private LocalDate exp;
 
     @Column(name = "item_description")
