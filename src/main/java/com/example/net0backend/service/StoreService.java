@@ -4,6 +4,7 @@ import com.example.net0backend.dto.request.MyLocationRequest;
 import com.example.net0backend.dto.response.NearStoreResponse;
 import com.example.net0backend.dto.response.StoreInfoResponse;
 import com.example.net0backend.entity.Shop;
+import com.example.net0backend.repository.ItemRepository;
 import com.example.net0backend.repository.ShopRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ import java.util.Optional;
 public class StoreService {
 
     private final ShopRepository shopRepository;
+    private final ItemRepository itemRepository;
 
     private final double EARTH_RADIUS = 6371e3;
 
@@ -40,10 +42,11 @@ public class StoreService {
     public StoreInfoResponse getStoreInfo(MyLocationRequest myLocation, Long storeId) {
         Shop shop = shopRepository.findShopById(storeId)
                 .orElseThrow(() -> new RuntimeException("가게를 찾을 수 없습니다."));
-        return StoreInfoResponse.of(shop, calculateDistance(myLocation, shop.getLatitude(), shop.getLongitude()));
+        Integer stock = itemRepository.countByShopId(storeId);
+        return StoreInfoResponse.of(shop, stock, calculateDistance(myLocation, shop.getLatitude(), shop.getLongitude()));
     }
 
-    public int calculateDistance(MyLocationRequest myLocation, Double x, Double y) {
+    public Integer calculateDistance(MyLocationRequest myLocation, Double x, Double y) {
         // 위도와 경도를 라디안 단위로 변환
         double x1Rad = Math.toRadians(myLocation.getX());
         double y1Rad = Math.toRadians(myLocation.getY());
