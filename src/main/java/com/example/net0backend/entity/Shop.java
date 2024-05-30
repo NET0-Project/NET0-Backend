@@ -27,6 +27,8 @@ public class Shop extends BaseTimeEntity {
 
     private String call;
 
+    private String type;
+
     @Column(name = "shop_description")
     private String description;
 
