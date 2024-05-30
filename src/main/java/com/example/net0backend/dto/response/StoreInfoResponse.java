@@ -11,14 +11,16 @@ public class StoreInfoResponse {
     private String storeType;
     private String openTime;
     private Integer distance;
+    private String telephone;
 
     @Builder
-    private StoreInfoResponse(Long storeId, String storeName, String storeType, String openTime, Integer distance) {
+    private StoreInfoResponse(Long storeId, String storeName, String storeType, String openTime, Integer distance, String telephone) {
         this.storeId = storeId;
         this.storeName = storeName;
         this.storeType = storeType;
         this.openTime = openTime;
         this.distance = distance;
+        this.telephone = telephone;
     }
 
     public static StoreInfoResponse of(Shop shop, Integer distance){
@@ -28,6 +30,7 @@ public class StoreInfoResponse {
                 .storeType(shop.getType())
                 .openTime(shop.getOpeningHour())
                 .distance(distance)
+                .telephone(shop.getCall())
                 .build();
     }
 
