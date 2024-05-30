@@ -2,6 +2,7 @@ package com.example.net0backend.service;
 
 import com.example.net0backend.dto.request.MyLocationRequest;
 import com.example.net0backend.dto.response.NearStoreResponse;
+import com.example.net0backend.dto.response.StoreInfoResponse;
 import com.example.net0backend.entity.Shop;
 import com.example.net0backend.repository.ShopRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,13 +25,20 @@ public class StoreService {
         List<Shop> nearShopList = shopRepository.findNearShopList(myLocation.getX(), myLocation.getY());
         List<NearStoreResponse> nearStoreResponseList = new ArrayList<>();
         nearShopList.stream().forEach(shop -> {
-            NearStoreResponse nearStoreResponse = new NearStoreResponse();
-            nearStoreResponseList.add(nearStoreResponse.from(shop));
+            nearStoreResponseList.add(NearStoreResponse.from(shop));
         });
         return nearStoreResponseList;
     }
 
     public Optional<Shop> getShopById(Long storeId){
         return shopRepository.findShopById(storeId);
+    }
+
+    public StoreInfoResponse getStoreInfo(Long storeId) {
+        Shop shop = shopRepository.findShopById(storeId)
+                .orElseThrow(() -> new RuntimeException("가게를 찾을 수 없습니다."));
+        StoreInfoResponse storeInfoResponse = new StoreInfoResponse();
+        storeInfoResponse.from(shop);
+        return storeInfoResponse;
     }
 }
